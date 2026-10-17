@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#111827">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Tatame English">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<title>Tatame English</title>
+<style>
+:root{--bg:#f4f5f7;--card:#fff;--ink:#172033;--muted:#687386;--accent:#e65a32;--accent2:#ffeadf;--line:#e3e7ed;--green:#16835f;--nav:#111827}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+header{background:var(--nav);color:white;padding:calc(18px + env(safe-area-inset-top)) 18px 20px;border-radius:0 0 24px 24px}
+.brand{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#ffb49a;font-weight:800}.headrow{display:flex;align-items:center;justify-content:space-between;gap:12px}h1{font-size:28px;margin:7px 0 5px}.sub{color:#c7ced8;font-size:14px}.streak{border:1px solid #495365;border-radius:14px;padding:9px 11px;text-align:center;min-width:66px}.streak b{font-size:20px;display:block}.streak small{font-size:10px;color:#c7ced8}
+main{max-width:760px;margin:auto;padding:16px 15px 100px}.screen{display:none}.screen.active{display:block}.section-title{font-size:20px;margin:12px 0 10px}.muted{color:var(--muted)}.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px;margin:12px 0;box-shadow:0 4px 16px #17203308}.hero{background:linear-gradient(135deg,#fff,#fff3ee);border-color:#ffd8c9}.eyebrow{font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--accent)}.big{font-size:25px;font-weight:800;margin:8px 0}.btn{border:0;border-radius:13px;padding:13px 15px;font-size:15px;font-weight:750;cursor:pointer;background:var(--accent);color:white;min-height:45px}.btn.secondary{background:#f0f2f5;color:var(--ink);border:1px solid var(--line)}.btn.dark{background:var(--nav)}.btn.small{padding:9px 12px;min-height:38px;font-size:13px}.row{display:flex;gap:9px;align-items:center;flex-wrap:wrap}.row>*{flex:1}.row .btn{flex:initial}.progress{height:8px;border-radius:99px;background:#e8ebf0;overflow:hidden}.progress>span{display:block;height:100%;background:var(--accent);width:0;transition:width .2s}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.stat{background:#fff;border:1px solid var(--line);border-radius:16px;padding:13px}.stat b{font-size:23px;display:block}.stat span{font-size:12px;color:var(--muted)}.tabs{position:fixed;bottom:0;left:0;right:0;background:#ffffffed;backdrop-filter:blur(12px);border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:8px 4px calc(8px + env(safe-area-inset-bottom));z-index:4}.tab{border:0;background:transparent;color:#6b7280;font-size:10px;font-weight:700;display:flex;flex-direction:column;align-items:center;gap:4px;min-width:54px;padding:5px 3px}.tab span{font-size:19px}.tab.active{color:var(--accent)}.flashcard{min-height:220px;display:flex;flex-direction:column;justify-content:center;text-align:center;cursor:pointer}.flashcard .word{font-size:30px;font-weight:850;margin:15px 0}.flashcard .translation{font-size:20px;font-weight:650;color:var(--green)}.pill{display:inline-block;background:var(--accent2);color:#9c381b;border-radius:999px;padding:6px 10px;font-size:11px;font-weight:800}.answer{display:block;width:100%;text-align:left;background:#fff;border:1px solid var(--line);border-radius:13px;padding:13px;margin:8px 0;color:var(--ink);font-size:15px}.answer.correct{border-color:#16835f;background:#e9f8f1}.answer.wrong{border-color:#c24136;background:#fff0ef}.feedback{font-weight:700;margin:12px 0;min-height:22px}.place-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.place{border:1px solid var(--line);background:#fff;border-radius:18px;padding:15px;min-height:128px;text-align:left;color:var(--ink)}.place .emoji{font-size:34px;display:block;margin-bottom:8px}.place b{display:block}.place small{color:var(--muted)}.place.active{border:2px solid var(--accent);background:#fff5f0}.memory-result{background:#111827;color:white;border-radius:18px;padding:18px;margin-top:12px}.memory-result p{color:#d2d8e2;margin-bottom:0}.checklist{list-style:none;padding:0}.checklist li{padding:10px 0;border-bottom:1px solid var(--line)}.checklist input{width:19px;height:19px;vertical-align:middle;margin-right:8px;accent-color:var(--accent)}.tiny{font-size:12px}.hidden{display:none!important}footer{font-size:11px;color:var(--muted);text-align:center;margin:25px 0}
+@media(min-width:600px){main{padding-top:24px}.place-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.flashcard .word{font-size:36px}}
+</style>
+</head>
+<body>
+<header>
+ <div class="headrow"><div><div class="brand">Tatame English · V1.0</div><h1>Inglês no tatame 🥋</h1><div class="sub">20 minutos por dia. Uma frase de cada vez.</div></div><div class="streak"><b id="streak">0</b><small>DIAS</small></div></div>
+</header>
+<main>
+<section id="home" class="screen active">
+ <div class="card hero"><div class="eyebrow">Seu treino de hoje</div><div class="big">Treine como um coach.</div><p class="muted">Aprenda comandos em inglês para conduzir suas aulas de Jiu-Jitsu com confiança.</p><div class="progress"><span id="homeProgress"></span></div><p class="tiny muted" id="homeProgressText">0 de 10 cartões marcados como conhecidos</p><button class="btn" onclick="showScreen('cards')">Começar a estudar →</button></div>
+ <h2 class="section-title">Seu painel</h2><div class="stats"><div class="stat"><b id="statKnown">0</b><span>Conhecidos</span></div><div class="stat"><b id="statQuiz">0%</b><span>Acertos no quiz</span></div><div class="stat"><b id="statMinutes">0</b><span>Minutos estudados</span></div></div>
+ <h2 class="section-title">Plano de 20 minutos</h2><div class="card"><p>🗂️ <b>5 min</b> — Flashcards</p><p>🔊 <b>5 min</b> — Ouvir e repetir</p><p>🧠 <b>5 min</b> — Quiz</p><p>🥋 <b>5 min</b> — Palácio da Memória</p><button class="btn secondary" onclick="finishSession()">Concluir sessão de hoje (+20 min)</button><p class="tiny muted">Use uma vez ao terminar o treino diário.</p></div>
+</section>
+<section id="cards" class="screen">
+ <h2 class="section-title">Flashcards</h2><p class="muted">Toque no cartão para revelar a tradução. Ouça a frase e repita em voz alta.</p>
+ <div class="row"><span class="pill" id="cardCount">Cartão 1 de 10</span><span class="muted tiny" id="cardStatus">Ainda não marcado</span></div>
+ <div class="card flashcard" id="flashcard" onclick="flipCard()" role="button" tabindex="0"><div class="eyebrow" id="cardLabel">COMANDO EM INGLÊS</div><div class="word" id="cardWord">Line up!</div><div id="cardAnswer" class="hidden"><div class="translation" id="cardTranslation"></div><p id="cardExample" class="muted"></p><p class="tiny muted" id="cardPronHint"></p></div><div class="tiny muted">Toque para virar ↻</div></div>
+ <div class="row"><button class="btn secondary" onclick="speakCurrent()">🔊 Ouvir</button><button class="btn secondary" onclick="speakSlow()">🐢 Devagar</button></div>
+ <div class="row" style="margin-top:9px"><button class="btn secondary" onclick="rateCard(false)">× Revisar</button><button class="btn" onclick="rateCard(true)">✓ Já sei</button></div>
+ <div class="row" style="margin-top:9px"><button class="btn secondary" onclick="prevCard()">← Anterior</button><button class="btn secondary" onclick="nextCard()">Próximo →</button></div>
+</section>
+<section id="quiz" class="screen">
+ <h2 class="section-title">Quiz do tatame</h2><p class="muted">Escolha o significado correto do comando em inglês.</p>
+ <div class="card"><div class="row"><span class="pill" id="quizCount">Pergunta 1 de 5</span><span class="muted tiny" id="quizScore">Pontos: 0</span></div><div class="big" id="quizQuestion">Pay attention!</div><div id="quizOptions"></div><div id="quizFeedback" class="feedback"></div><button class="btn hidden" id="quizNext" onclick="nextQuestion()">Próxima pergunta →</button><button class="btn hidden" id="quizRestart" onclick="startQuiz()">Tentar novamente</button></div>
+</section>
+<section id="memory" class="screen">
+ <h2 class="section-title">Palácio da Memória</h2><p class="muted">Imagine que você caminha pela academia. Toque em cada lugar para ligar o local a um comando.</p>
+ <div class="place-grid">
+  <button class="place active" onclick="selectPlace('entry',this)"><span class="emoji">🚪</span><b>Entrada</b><small>Chegada dos alunos</small></button>
+  <button class="place" onclick="selectPlace('mat',this)"><span class="emoji">🥋</span><b>Tatame</b><small>Formar duplas</small></button>
+  <button class="place" onclick="selectPlace('wall',this)"><span class="emoji">🧱</span><b>Parede</b><small>Organizar a turma</small></button>
+  <button class="place" onclick="selectPlace('water',this)"><span class="emoji">💧</span><b>Bebedouro</b><small>Pausa para água</small></button>
+ </div>
+ <div class="memory-result"><div class="eyebrow">Sua associação</div><h2 id="memoryPlaceName">🚪 Entrada</h2><div class="big" id="memoryPhrase">Line up!</div><p id="memoryTranslation">Façam fila!</p><button class="btn" style="margin-top:14px" onclick="speakMemory()">🔊 Ouvir comando</button></div>
+ <div class="card"><b>Como treinar</b><ol><li>Feche os olhos e imagine o lugar.</li><li>Visualize os alunos realizando a ação.</li><li>Diga o comando em inglês em voz alta.</li><li>Repita o percurso sem olhar a tela.</li></ol></div>
+</section>
+<section id="progress" class="screen">
+ <h2 class="section-title">Meu progresso</h2><div class="stats"><div class="stat"><b id="pKnown">0/10</b><span>Cartões conhecidos</span></div><div class="stat"><b id="pAttempts">0</b><span>Respostas no quiz</span></div><div class="stat"><b id="pMinutes">0</b><span>Minutos acumulados</span></div></div>
+ <div class="card"><b>Domínio dos comandos</b><div class="progress" style="margin-top:12px"><span id="knownBar"></span></div><p class="muted tiny" id="knownText">Marque os cartões que você já domina.</p></div>
+ <h3>Cartões para revisar</h3><div id="reviewList" class="card"></div>
+ <div class="card"><b>Seus dados ficam neste aparelho</b><p class="muted tiny">O progresso é salvo neste navegador. Se limpar os dados do Safari, o progresso poderá ser apagado.</p><button class="btn secondary" onclick="exportProgress()">Exportar meu progresso</button> <button class="btn secondary" onclick="resetProgress()">Zerar progresso</button></div>
+</section>
+<section id="plan" class="screen">
+ <h2 class="section-title">Plano de estudo</h2><div class="card"><div class="eyebrow">Rotina diária · 20 minutos</div><h3>Treino rápido</h3><ul class="checklist"><li><label><input type="checkbox"> 5 min — Revisar 10 flashcards</label></li><li><label><input type="checkbox"> 5 min — Ouvir e repetir cada frase</label></li><li><label><input type="checkbox"> 5 min — Fazer o quiz</label></li><li><label><input type="checkbox"> 5 min — Percorrer o Palácio da Memória</label></li></ul><button class="btn" onclick="finishSession()">Concluir 20 minutos</button></div>
+ <div class="card"><h3>Meta para 7 dias</h3><p>Dia 1–2: reconhecer e pronunciar os comandos.</p><p>Dia 3–4: falar sem olhar a tradução.</p><p>Dia 5–6: usar os comandos durante a aula.</p><p>Dia 7: revisar os cartões difíceis e repetir o quiz.</p></div>
+ <div class="card"><h3>Nota sobre a pronúncia</h3><p class="muted">O botão de áudio usa a síntese de voz disponível no dispositivo. A voz e a qualidade variam conforme o iPhone e os idiomas instalados. A gravação da sua própria voz e a avaliação automática ainda não fazem parte desta versão.</p></div>
+</section>
+<footer>Tatame English V1.0 · Feito para estudar inglês no Jiu-Jitsu</footer>
+</main>
+<nav class="tabs" aria-label="Navegação principal">
+ <button class="tab active" data-screen="home" onclick="showScreen('home')"><span>⌂</span>Início</button>
+ <button class="tab" data-screen="cards" onclick="showScreen('cards')"><span>▤</span>Cards</button>
+ <button class="tab" data-screen="quiz" onclick="showScreen('quiz')"><span>✓</span>Quiz</button>
+ <button class="tab" data-screen="memory" onclick="showScreen('memory')"><span>🧠</span>Memória</button>
+ <button class="tab" data-screen="progress" onclick="showScreen('progress')"><span>↗</span>Progresso</button>
+ <button class="tab" data-screen="plan" onclick="showScreen('plan')"><span>◷</span>Plano</button>
+</nav>
+<script>
+const cards=[
+{en:"Line up!",pt:"Façam fila!",ex:"Everyone, line up here!",hint:"Comece a aula reunindo todos os alunos."},
+{en:"Listen!",pt:"Escutem!",ex:"Listen carefully, please.",hint:"Use para pedir silêncio e atenção."},
+{en:"Pay attention!",pt:"Prestem atenção!",ex:"Pay attention to the technique.",hint:"Destaque a sílaba TEN em attention."},
+{en:"Sit down!",pt:"Sentem-se!",ex:"Sit down on the line.",hint:"Comando para sentar."},
+{en:"Stand up!",pt:"Levantem-se!",ex:"Stand up and make a line.",hint:"Comando para ficar de pé."},
+{en:"Let's go!",pt:"Vamos lá!",ex:"Let's go, team!",hint:"Uma frase para incentivar o grupo."},
+{en:"Let go!",pt:"Solte!",ex:"Let go of the sleeve.",hint:"Comando para soltar algo que está segurando."},
+{en:"Stay on the line!",pt:"Fiquem na linha!",ex:"Stay on the line, please.",hint:"Peça para os alunos permanecerem na linha."},
+{en:"Tie your belt!",pt:"Amarre sua faixa!",ex:"Tie your belt before class.",hint:"Comando antes de começar a treinar."},
+{en:"Good job!",pt:"Bom trabalho!",ex:"Good job! Try it one more time.",hint:"Elogie o esforço do aluno."}
+];
+const places={entry:{name:"🚪 Entrada",en:"Line up!",pt:"Façam fila!"},mat:{name:"🥋 Tatame",en:"Partner up!",pt:"Formem duplas!"},wall:{name:"🧱 Parede",en:"Stay on the line!",pt:"Fiquem na linha!"},water:{name:"💧 Bebedouro",en:"Water break!",pt:"Pausa para água!"}};
+const key="tatameEnglishV1";
+let state={known:[],review:[],attempts:0,correct:0,minutes:0,streak:0,lastDate:"",quizIndex:0,quizScore:0,quizAnswered:false,cardIndex:0,flipped:false};
+try{state={...state,...JSON.parse(localStorage.getItem(key)||"{}")}}catch(e){}
+function save(){localStorage.setItem(key,JSON.stringify(state));renderProgress()}
+function showScreen(id){document.querySelectorAll(".screen").forEach(x=>x.classList.toggle("active",x.id===id));document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("active",x.dataset.screen===id));if(id==="quiz"&&!quizStarted)startQuiz();if(id==="cards")renderCard();if(id==="progress")renderProgress();window.scrollTo(0,0)}
+function speak(text,rate=0.85){if(!("speechSynthesis"in window)){alert("Este navegador não oferece áudio de pronúncia.");return}speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang="en-US";u.rate=rate;const vs=speechSynthesis.getVoices();const v=vs.find(v=>v.lang==="en-US")||vs.find(v=>v.lang.startsWith("en"));if(v)u.voice=v;speechSynthesis.speak(u)}
+function renderCard(){const c=cards[state.cardIndex];document.getElementById("cardCount").textContent=`Cartão ${state.cardIndex+1} de ${cards.length}`;document.getElementById("cardWord").textContent=c.en;document.getElementById("cardTranslation").textContent=c.pt;document.getElementById("cardExample").textContent="Exemplo: "+c.ex;document.getElementById("cardPronHint").textContent=c.hint;document.getElementById("cardAnswer").classList.toggle("hidden",!state.flipped);document.getElementById("cardLabel").textContent=state.flipped?"SIGNIFICADO E EXEMPLO":"COMANDO EM INGLÊS";document.getElementById("cardStatus").textContent=state.known.includes(state.cardIndex)?"✓ Conhecido":state.review.includes(state.cardIndex)?"× Revisar":"Ainda não marcado"}
+function flipCard(){state.flipped=!state.flipped;renderCard()}function nextCard(){state.cardIndex=(state.cardIndex+1)%cards.length;state.flipped=false;renderCard()}function prevCard(){state.cardIndex=(state.cardIndex+cards.length-1)%cards.length;state.flipped=false;renderCard()}function speakCurrent(){speak(cards[state.cardIndex].en)}function speakSlow(){speak(cards[state.cardIndex].en,.62)}
+function rateCard(known){const i=state.cardIndex;state.known=state.known.filter(x=>x!==i);state.review=state.review.filter(x=>x!==i);if(known)state.known.push(i);else state.review.push(i);state.flipped=true;save();renderCard();if(i<cards.length-1){state.cardIndex=i+1;state.flipped=false;renderCard()}}
+let quizStarted=false;const quizItems=[{i:2,options:["Parem em fila!","Prestem atenção!","Amarrem a faixa!","Sentem-se!"],correct:1},{i:5,options:["Vamos lá!","Solte!","Escutem!","Fiquem na linha!"],correct:0},{i:8,options:["Levantem-se!","Bom trabalho!","Amarre sua faixa!","Façam fila!"],correct:2},{i:1,options:["Escutem!","Prestem atenção!","Solte!","Vamos lá!"],correct:0},{i:9,options:["Pausa para água!","Bom trabalho!","Sentem-se!","Façam fila!"],correct:1}];
+function startQuiz(){quizStarted=true;state.quizIndex=0;state.quizScore=0;state.quizAnswered=false;renderQuiz()}
+function renderQuiz(){const q=quizItems[state.quizIndex];document.getElementById("quizCount").textContent=`Pergunta ${state.quizIndex+1} de ${quizItems.length}`;document.getElementById("quizScore").textContent="Pontos: "+state.quizScore;document.getElementById("quizQuestion").textContent=cards[q.i].en;document.getElementById("quizFeedback").textContent="";document.getElementById("quizNext").classList.add("hidden");document.getElementById("quizRestart").classList.add("hidden");const opts=document.getElementById("quizOptions");opts.innerHTML="";q.options.forEach((o,n)=>{const b=document.createElement("button");b.className="answer";b.textContent=o;b.onclick=()=>answerQuiz(n);opts.appendChild(b)});state.quizAnswered=false}
+function answerQuiz(n){if(state.quizAnswered)return;state.quizAnswered=true;const q=quizItems[state.quizIndex];state.attempts++;const correct=n===q.correct;if(correct){state.quizScore++;state.correct++}document.querySelectorAll("#quizOptions button").forEach((b,i)=>{if(i===q.correct)b.classList.add("correct");else if(i===n)b.classList.add("wrong");b.disabled=true});document.getElementById("quizFeedback").textContent=correct?"Muito bem! Resposta correta.":"Continue praticando! Resposta: "+q.options[q.correct];document.getElementById("quizScore").textContent="Pontos: "+state.quizScore;document.getElementById("quizNext").classList.remove("hidden");if(state.quizIndex===quizItems.length-1){document.getElementById("quizNext").textContent="Ver resultado";}save()}
+function nextQuestion(){if(state.quizIndex<quizItems.length-1){state.quizIndex++;renderQuiz()}else{document.getElementById("quizQuestion").textContent=`Você acertou ${state.quizScore} de ${quizItems.length}!`;document.getElementById("quizOptions").innerHTML="";document.getElementById("quizFeedback").textContent="Revise os cartões e tente novamente para melhorar.";document.getElementById("quizNext").classList.add("hidden");document.getElementById("quizRestart").classList.remove("hidden");document.getElementById("quizRestart").textContent="Tentar novamente";}}
+function selectPlace(id,el){document.querySelectorAll(".place").forEach(x=>x.classList.remove("active"));el.classList.add("active");const p=places[id];document.getElementById("memoryPlaceName").textContent=p.name;document.getElementById("memoryPhrase").textContent=p.en;document.getElementById("memoryTranslation").textContent=p.pt}
+function speakMemory(){speak(document.getElementById("memoryPhrase").textContent)}
+function finishSession(){const today=new Date().toISOString().slice(0,10);state.minutes+=20;if(state.lastDate!==today){const y=new Date(Date.now()-86400000).toISOString().slice(0,10);state.streak=state.lastDate===y?state.streak+1:1;state.lastDate=today}save();alert("Sessão registrada: +20 minutos. Parabéns pelo treino!")}
+function renderProgress(){const known=state.known.length;document.getElementById("streak").textContent=state.streak;document.getElementById("statKnown").textContent=known;document.getElementById("statQuiz").textContent=state.attempts?Math.round(state.correct/state.attempts*100)+"%":"0%";document.getElementById("statMinutes").textContent=state.minutes;document.getElementById("homeProgress").style.width=known/cards.length*100+"%";document.getElementById("homeProgressText").textContent=`${known} de ${cards.length} cartões marcados como conhecidos`;document.getElementById("pKnown").textContent=known+"/"+cards.length;document.getElementById("pAttempts").textContent=state.attempts;document.getElementById("pMinutes").textContent=state.minutes;document.getElementById("knownBar").style.width=known/cards.length*100+"%";document.getElementById("knownText").textContent=`${Math.round(known/cards.length*100)}% dos cartões marcados como conhecidos`;const r=document.getElementById("reviewList");const items=state.review.map(i=>cards[i].en+" — "+cards[i].pt);r.innerHTML=items.length?items.map(x=>"<p>"+x+"</p>").join(""):"<p class='muted'>Nenhum cartão marcado para revisão. Marque × nos flashcards que quer praticar novamente.</p>";}
+function exportProgress(){const blob=new Blob([JSON.stringify({state,cards},null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="tatame-english-progresso.json";a.click();URL.revokeObjectURL(a.href)}
+function resetProgress(){if(confirm("Tem certeza que deseja apagar seu progresso?")){localStorage.removeItem(key);state={known:[],review:[],attempts:0,correct:0,minutes:0,streak:0,lastDate:"",quizIndex:0,quizScore:0,quizAnswered:false,cardIndex:0,flipped:false};save();renderCard();alert("Progresso zerado.")}}
+if("serviceWorker"in navigator && location.protocol.startsWith("http"))navigator.serviceWorker.register("./sw.js").catch(()=>{});
+renderCard();renderProgress();
+</script>
+</body></html>
